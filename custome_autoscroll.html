@@ -30,6 +30,7 @@
         position: absolute;
         height: 125px; overflow: hidden;
         bottom: 0; width: 100%;
+        background-color:azure
     }
 
     #isiText {
@@ -38,6 +39,7 @@
         width: 264px; height: 94%;
         overflow-y: scroll;
         scrollbar-width: none;
+        background-color: white;
     }
 
     #isiText::-webkit-scrollbar {
@@ -78,7 +80,5 @@
 </body>
 <script src="custom_scroll.js"></script>
 <script>
-    customScroll({
-        scrollArea: isiText, knob: scrollButton, rail: buttonPath
-    })
+    customScroll(isiText, buttonPath)
 </script></html>

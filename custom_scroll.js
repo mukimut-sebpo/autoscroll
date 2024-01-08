@@ -1,11 +1,13 @@
-function customScroll(divs, manualScrollSpeed = 0, autoScrollSpeed = 75, autoScrollDelay = 2000) {    
-    const {scrollArea, rail, knob} = divs;
- 
+function customScroll(scrollArea, rail, manualScrollSpeed = 0, autoScrollSpeed = 75, autoScrollDelay = 2000) {    
     let knobClicked = false, initialMousePosition = -1, knobTopPosition = 0, currentScrollTop = 0, autoScroll = true,
         intervalId = 0;
 
+    const knob = rail.childNodes[0];
     const maxScroll = scrollArea.scrollHeight - scrollArea.offsetHeight;
     const maxKnobTop = rail.offsetHeight - knob.offsetHeight;
+
+    scrollArea.addEventListener('wheel', stopScroll);
+    scrollArea.addEventListener('click', stopScroll);
 
     scrollArea.addEventListener('scroll', e => {
         if(knobClicked) return;
@@ -27,9 +29,6 @@ function customScroll(divs, manualScrollSpeed = 0, autoScrollSpeed = 75, autoScr
 
         setKnobTop();
     });
-
-    scrollArea.addEventListener('wheel', stopScroll);
-    scrollArea.addEventListener('click', stopScroll);
 
     knob.addEventListener('mousedown', () => {
         knob.style.backgroundColor = 'green';
@@ -73,7 +72,6 @@ function customScroll(divs, manualScrollSpeed = 0, autoScrollSpeed = 75, autoScr
             if(currentScrollTop == maxScroll) {
                 stopScroll();
             } 
-            scrollArea.scrollTop = currentScrollTop;
             setKnobTop();
         }, autoScrollSpeed)
     }, autoScrollDelay);
